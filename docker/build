@@ -1,0 +1,25 @@
+#选择镜像 docker build -t dockerTag  build
+FROM ubuntu
+#创建人
+MAINTAINER dnw "email@163.com"
+
+#执行命令 更新apt包和安装基本应用
+
+RUN apt-get update
+#安装ssh服务
+RUN apt-get install -y openssh-server vim
+RUN sed -i 's/PermitRootLogin prohibit-password/PermitRootLogin yes/g' /etc/ssh/sshd_config 
+
+#修改root 密码
+RUN echo "root:123456" | chpasswd
+
+#安装nginx ，php，mysql
+RUN apt-get install -y nginx mysql-server php
+
+#对nginx 的配置
+
+
+
+
+#需要监听的端口
+EXPOSE 22 3306 80
